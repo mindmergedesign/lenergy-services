@@ -1,0 +1,29 @@
+---
+import PageBuilderImage from '@/components/elements/blocks/PageBuilderImage.astro'
+import PageBuilderContent from '@/components/elements/blocks/PageBuilderContent.astro'
+import PageBuilderSlider from '@/components/elements/blocks/PageBuilderSlider.astro'
+import PageBuilderVideo from '@/components/elements/blocks/PageBuilderVideo.astro'
+
+const Components = {
+	content: PageBuilderContent,
+	slider: PageBuilderSlider,
+	image: PageBuilderImage,
+	//textAndImage: PageBuilderTextAndImage,
+	video: PageBuilderVideo
+}
+
+// Props passed to the Astro component
+const { type, pageBuilder } = Astro.props
+---
+
+<Fragment>
+	{
+		pageBuilder?.map((block: any) => {
+			//@ts-ignore
+			const Component = Components[block?._type]
+			if (Component) {
+				return <Component block={block} type={type} />
+			}
+		})
+	}
+</Fragment>

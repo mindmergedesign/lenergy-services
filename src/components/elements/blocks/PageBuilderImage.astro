@@ -1,0 +1,15 @@
+---
+import { urlForImage } from '@/sanity/lib/urlForImage'
+import { Image } from 'astro:assets'
+
+const { block } = Astro.props
+const { class: className, ...rest } = Astro.props
+---
+
+<Image
+	src={`${urlForImage(block?.asset).quality(60).url()}`}
+	alt={block.caption || ' '}
+	width={1500}
+	height={1000}
+	class="h-full w-full object-cover"
+/>

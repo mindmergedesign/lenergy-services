@@ -1,0 +1,8 @@
+---
+import PortableText from '@/components/elements/PortableText.astro'
+
+const { block } = Astro.props
+const { class: className, ...rest } = Astro.props
+---
+
+<PortableText portableText={block?.content} />

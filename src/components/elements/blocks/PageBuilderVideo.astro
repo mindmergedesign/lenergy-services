@@ -1,0 +1,10 @@
+---
+import { Vimeo } from '@astro-community/astro-embed-vimeo'
+
+const { block } = Astro.props
+const { class: className, ...rest } = Astro.props
+---
+
+<div class="relative mx-auto aspect-video overflow-hidden bg-muted text-center">
+	<Vimeo id={block?.videoUrl} />
+</div>

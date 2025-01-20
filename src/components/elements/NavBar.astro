@@ -1,0 +1,73 @@
+---
+import Logo from '@/components/elements/Logo.astro'
+import navItems from '@/components/elements/navItems'
+import { AlignJustify, X } from 'lucide-astro'
+
+const { pathname, ...rest } = Astro.props
+---
+
+<nav class="w-full">
+	<div x-data="{ open: false }">
+		<div class="flex justify-between">
+			<div class="flex w-full justify-between">
+				<div class="block w-48 self-center py-3 text-primary md:w-64">
+					<a href="/" class="w-full">
+						<Logo class="header-logo text-primary" />
+					</a>
+				</div>
+				<div class="hidden w-full justify-end text-primary sm:ml-6 sm:flex sm:space-x-3">
+					{
+						navItems
+							.map(({ itemName, itemUrl }) => (
+								<a
+									href={itemUrl}
+									class={
+										pathname === itemUrl || (itemUrl !== '/' && pathname.startsWith(itemUrl))
+											? 'active inline-flex items-center bg-black/20 px-3 pt-1 text-sm font-medium text-white'
+											: 'hover:white inline-flex items-center px-3 pt-1 text-sm font-medium text-white hover:bg-black/20'
+									}
+								>
+									{itemName}
+								</a>
+							))
+							.slice(1)
+					}
+				</div>
+			</div>
+
+			<div class="-mr-2 flex items-center sm:hidden">
+				{/* Mobile menu button */}
+				<div
+					class="md: inline-flex items-center justify-center rounded-md p-2 text-black hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+				>
+					<span class="sr-only">Open main menu</span>
+
+					<button @click="open = ! open" id='mobile-menu'
+						aria-label='mobile-menu'>
+						<X class="text-primary" x-cloak x-show="open == true" />
+						<AlignJustify class="text-primary" x-cloak x-show="open == false" />
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="animate-slide-down sm:hidden" x-show="open" @click.outside="open = false">
+			<div class="space-y-1 pb-3 pt-2">
+				{
+					navItems.map(({ itemName, itemUrl }) => (
+						<a
+							href={itemUrl}
+							class={
+								pathname === itemUrl || (itemUrl !== '/' && pathname.startsWith(itemUrl))
+									? 'active block border-l-4 border-primary bg-white py-2 pl-3 pr-4 text-base font-medium'
+									: 'block border-l-4 border-muted bg-white py-2 pl-3 pr-4 text-base font-medium'
+							}
+						>
+							{itemName}
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</nav>

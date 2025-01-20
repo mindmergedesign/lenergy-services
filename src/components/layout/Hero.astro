@@ -1,0 +1,15 @@
+---
+import Container from '@/components/layout/Container.astro'
+
+const { class: className, ...rest } = Astro.props
+---
+
+<div
+	class={`relative overflow-hidden w-full prose max-w-none prose-h1:mb-0 prose-p:max-w-lg bg-muted ${className}`}
+>
+	<Container class="relative z-20 py-24 md:py-32">
+		<div class="max-w-xl text-white">
+			<slot />
+		</div>
+	</Container>
+</div>

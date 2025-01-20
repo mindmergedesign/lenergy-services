@@ -1,0 +1,44 @@
+---
+import { Icon } from 'astro-icon/components'
+
+const { settings } = Astro.props
+const { class: className, ...rest } = Astro.props
+---
+
+<ul class={`m-0 flex items-center p-0 ${className}`}>
+	{
+		settings?.socialMedia?.map(({ ...social }) => (
+			<li class='mr-3 w-9 list-none p-0 text-center last:mr-0'>
+				<a
+					href={social?.socialUrl}
+					title={social?.socialSite}
+					class='text-current hover:text-primary'
+				>
+					{social?.socialSite == 'facebook' ? (
+						<Icon name='social-facebook' class='h-9 w-9' title='Facebook' />
+					) : null}
+					{social?.socialSite == 'twitter' ? (
+						<Icon name='social-x-twitter' class='h-9 w-9' title='twitter' />
+					) : null}
+					{social?.socialSite == 'tik-tok' ? <Icon name='social-tik-tok' class='h-9 w-9' /> : null}
+					{social?.socialSite == 'linkedin' ? (
+						<Icon name='social-linkedIn' class='h-9 w-9' title='LinkedIn' />
+					) : null}
+					{social?.socialSite == 'pinterest' ? (
+						<Icon name='social-pinterest' class='h-9 w-9' title='Pinterest' />
+					) : null}
+					{social?.socialSite == 'youtube' ? <Icon name='social-youtube' class='h-9 w-9' /> : null}
+					{social?.socialSite == 'instagram' ? (
+						<Icon name='social-instagram' class='h-9 w-9' title='Instagram' />
+					) : null}
+					{social?.socialSite == 'vimeo' ? (
+						<Icon name='social-vimeo' class='h-9 w-9' title='Vimeo' />
+					) : null}
+					{social?.socialSite == 'yelp' ? (
+						<Icon name='social-yelp' class='h-9 w-9' title='Yelp' />
+					) : null}
+				</a>
+			</li>
+		))
+	}
+</ul>

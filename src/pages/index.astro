@@ -1,0 +1,20 @@
+---
+import '@/styles/globals.css'
+import PortableText from '@/components/elements/PortableText.astro'
+
+import Container from '@/components/layout/Container.astro'
+import Layout from '@/layouts/Layout.astro'
+import Section from '@/components/layout/Section.astro'
+
+import { settings, home } from '@/sanity/lib/utils'
+---
+
+<Layout settings={settings}>
+	<main id="main-content" class="prose max-w-none">
+		<Section id="intro">
+			<Container>
+				<PortableText portableText={home?.content} />
+			</Container>
+		</Section>
+	</main>
+</Layout>

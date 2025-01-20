@@ -1,0 +1,25 @@
+---
+import { Image } from 'astro:assets'
+import PortableText from '@/components/elements/PortableText.astro'
+import { urlForImage } from '@/sanity/lib/urlForImage'
+
+const { content } = Astro.props
+const { class: className, ...rest } = Astro.props
+---
+
+<div class={`grid grid-cols-6 gap-9 ${className}`}>
+	<div class="col-a col-span-6 md:col-span-3">
+		<PortableText portableText={content?.text} />
+		<slot />
+	</div>
+
+	<div class="col-b col-span-6 md:col-span-3">
+		<Image
+			src={`${urlForImage(content?.image).quality(60).url()}`}
+			alt="site-image"
+			width={800}
+			height={600}
+			class="aspect-[4/3] bg-muted object-cover"
+		/>
+	</div>
+</div>

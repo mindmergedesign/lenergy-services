@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets'
+import { urlForImage } from '@/sanity/lib/urlForImage'
+import '@/styles/blaze.css'
+import { ChevronLeft } from 'lucide-astro'
+
+const { class: className, gallery, ...rest } = Astro.props
+---
+
+<div class="blaze-slider">
+	<div class="blaze-container">
+		<div class="blaze-track-container relative">
+			<div class="blaze-track">
+				{
+					gallery?.images?.map(({ ...item }) => (
+						<div class="aspect-[3/2]">
+							<Image
+								src={`${urlForImage(item).quality(60).url()}`}
+								alt="SafeCo"
+								width={1500}
+								height={1000}
+								class="h-full w-full object-cover"
+								loading={'eager'}
+							/>
+						</div>
+					))
+				}
+			</div>
+		</div>
+		<div class="absolute inset-0 flex h-full w-full flex-wrap items-center justify-between px-3">
+			<!-- navigation buttons -->
+			<button class="blaze-prev !text-primary">
+				<ChevronLeft class="h-20 w-20 text-white/60 hover:text-white" />
+			</button>
+			<button class="blaze-next">
+				<ChevronLeft class="h-20 w-20 text-white/60 hover:text-white" />
+			</button>
+		</div>
+	</div>
+
+	<div class="relative z-20 flex w-full flex-wrap">
+		<!-- pagination container -->
+		<div class="blaze-pagination flex w-full justify-center text-primary"></div>
+	</div>
+</div>
+
+<script>
+	import BlazeSlider from 'blaze-slider'
+	import 'blaze-slider/dist/blaze.css'
+
+	document.addEventListener('astro:page-load', () => {
+		const el = document.querySelector('.blaze-slider')
+		//@ts-ignore
+		new BlazeSlider(el)
+	})
+</script>

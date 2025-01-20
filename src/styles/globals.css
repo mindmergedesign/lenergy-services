@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+ 
+    --primary: 223 100% 70%;
+    --primary-foreground: 0 0% 98%;
+ 
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+ 
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+ 
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+ 
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+ 
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+ 
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+ 
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+ 
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+ 
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+ 
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+ 
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+ 
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+}
+ 
+@layer base {
+	* {
+		@apply border-border;
+	}
+	html {
+		scroll-behavior: smooth;
+		@apply h-full;
+	}
+	body {
+		@apply bg-background text-foreground h-full;
+	}
+	h1,
+	.h1 {
+		@apply !my-6 !text-5xl;
+	}
+	h2,
+	.h2 {
+		@apply !my-3 !text-2xl;
+	}
+	h3,
+	.h3 {
+		@apply !text-lg;
+	}
+	h4,
+	.h4 {
+		@apply !text-base;
+	}
+
+	@screen md {
+		h1,
+		.h1 {
+			@apply !text-6xl;
+		}
+		h2,
+		.h2 {
+			@apply !text-3xl;
+		}
+		h3,
+		.h3 {
+			@apply !text-lg;
+		}
+		h4,
+		.h4 {
+			@apply !text-base;
+		}
+	}
+
+	@screen lg {
+		h1,
+		.h1 {
+			@apply !text-6xl;
+		}
+		h2,
+		.h2 {
+			@apply !text-4xl;
+		}
+		h3,
+		.h3 {
+			@apply !text-xl font-bold;
+		}
+		h4,
+		.h4 {
+			@apply !text-lg font-bold;
+		}
+	}
+}
+
+@layer components {
+	.btn{
+		@apply rounded-md px-3 py-2 text-sm shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 border-2 border-transparent transition ease-in-out  hover:scale-[105%] duration-300 hover:saturate-200 no-underline
+	}
+	.btn-primary{
+		@apply bg-primary text-primary-foreground hover:bg-primary/90
+	}
+	.btn-secondary{
+		@apply bg-secondary text-secondary-foreground hover:bg-secondary/90
+	}
+	.btn-accent{
+		@apply bg-accent text-accent-foreground hover:bg-accent/90
+	}
+	.btn-muted{
+		@apply bg-muted text-muted-foreground hover:bg-muted/90
+	}
+	.btn-outline{
+		@apply  text-white hover:bg-white border-gray-300 border hover:text-primary
+	}
+	
+		
+}
+
+@layer utilities {
+	.col-a {
+		@apply !order-1;
+	}
+	.col-b {
+		@apply !order-2;
+	}
+	.revert-grid .col-a{
+		@apply  !order-3;
+	 
+	}
+	.intro, .unknown__pt__mark__intro {
+		@apply text-lg md:text-xl max-w-2xl;
+	}
+	[x-cloak] { display: none !important; }
+}

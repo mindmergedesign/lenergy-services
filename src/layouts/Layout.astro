@@ -1,0 +1,46 @@
+---
+import '@fontsource-variable/red-hat-display'
+import '@/styles/globals.css'
+import { ClientRouter } from 'astro:transitions'
+
+import Footer from '@/components/layout/Footer.astro'
+import Header from '@/components/layout/Header.astro'
+
+const { settings } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+		<ClientRouter />
+
+		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+		<slot name="head" />
+	</head>
+
+	<body>
+		<a
+			class="absolute left-0 z-50 m-3 -translate-y-56 bg-secondary p-3 text-secondary-foreground no-underline transition focus:translate-y-0"
+			href="#main-content">Skip Navigation</a
+		>
+
+		<div class="flex min-h-screen flex-col justify-between transition-all duration-500 ease-out">
+			<Header />
+
+			<div class="flex-grow">
+				<slot />
+			</div>
+
+			<Footer settings={settings}>
+				<slot name="footer" />
+			</Footer>
+		</div>
+	</body>
+</html>

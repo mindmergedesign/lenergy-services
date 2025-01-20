@@ -1,0 +1,8 @@
+---
+import PhotoCarousel from '@/components/elements/PhotoCarousel.astro'
+
+const { block } = Astro.props
+const { class: className, ...rest } = Astro.props
+---
+
+<PhotoCarousel gallery={block} />
