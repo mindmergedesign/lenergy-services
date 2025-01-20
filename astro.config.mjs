@@ -17,7 +17,7 @@ export default defineConfig({
   integrations: [tailwind({
     applyBaseStyles: false
   }), sanity({
-    projectId: 'f732bn2a',
+    projectId: 'kopfbx3j',
     dataset: 'production',
     apiVersion: '2022-11-16',
     useCdn: true
