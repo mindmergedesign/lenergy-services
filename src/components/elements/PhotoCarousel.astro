@@ -13,7 +13,7 @@ const { class: className, gallery, ...rest } = Astro.props
 			<div class="blaze-track">
 				{
 					gallery?.images?.map(({ ...item }) => (
-						<div class="aspect-[3/2]">
+						<div class="aspect-3/2">
 							<Image
 								src={`${urlForImage(item).quality(60).url()}`}
 								alt="SafeCo"
@@ -29,7 +29,7 @@ const { class: className, gallery, ...rest } = Astro.props
 		</div>
 		<div class="absolute inset-0 flex h-full w-full flex-wrap items-center justify-between px-3">
 			<!-- navigation buttons -->
-			<button class="blaze-prev !text-primary">
+			<button class="blaze-prev text-primary!">
 				<ChevronLeft class="h-20 w-20 text-white/60 hover:text-white" />
 			</button>
 			<button class="blaze-next">

@@ -7,11 +7,9 @@ const { settings } = Astro.props
 ---
 
 <footer
-	class="prose max-w-none bg-primary py-6 text-sm text-primary-foreground/50 prose-a:text-primary-foreground/50"
+	class="prose bg-primary text-primary-foreground/50 prose-a:text-primary-foreground/50 max-w-none py-6 text-sm"
 >
 	<Container>
 		<p>&copy; {n}{' '} {settings?.siteName}</p>
-
-		<a href="https://www.mindmergedesign.com/" class="no-underline">Site by mindmerge </a>
 	</Container>
 </footer>
