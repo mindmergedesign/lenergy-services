@@ -1,14 +1,29 @@
 ---
+// Packages
+import { urlForImage } from '@/sanity/lib/urlForImage'
+import { Image } from 'astro:assets'
+
+// Components
 import Container from '@/components/layout/Container.astro'
 
-const { class: className, ...rest } = Astro.props
+// Misc
+const { hero, class: className, ...rest } = Astro.props
 ---
 
 <div
 	class={`relative overflow-hidden w-full prose max-w-none prose-h1:mb-0 prose-p:max-w-lg bg-muted ${className}`}
 >
-	<Container class="relative z-20 py-24 md:py-32">
-		<div class="max-w-xl text-white">
+	<div class="absolute inset-0 z-10! h-full w-full bg-black/35"></div>
+	<Image
+		src={`${urlForImage(hero?.heroImage).quality(60).url()}`}
+		alt="Lenergy Sevices"
+		width={1500}
+		height={1000}
+		class="absolute inset-0 z-0 my-0! h-full w-full object-cover"
+		loading={'eager'}
+	/>
+	<Container class="relative z-20 py-32 md:py-44 lg:py-56">
+		<div class="prose prose-headings:text-white max-w-none text-center">
 			<slot />
 		</div>
 	</Container>

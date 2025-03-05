@@ -1,19 +1,43 @@
 ---
-import '@/styles/globals.css'
+// Packages
+import ImageAndText from '@/components/elements/ImageAndText.astro'
 import PortableText from '@/components/elements/PortableText.astro'
 
+// Components
 import Container from '@/components/layout/Container.astro'
-import Layout from '@/layouts/Layout.astro'
+import Hero from '@/components/layout/Hero.astro'
 import Section from '@/components/layout/Section.astro'
+import Layout from '@/layouts/Layout.astro'
 
-import { settings, home } from '@/sanity/lib/utils'
+// Misc
+import { home, settings } from '@/sanity/lib/utils'
 ---
 
 <Layout settings={settings}>
-	<main id="main-content" class="prose max-w-none">
+	<Hero hero={home?.hero}>
+		<Container>
+			<PortableText portableText={home?.hero?.heroContent} />
+		</Container>
+	</Hero>
+
+	<main id="main-content">
 		<Section id="intro">
 			<Container>
-				<PortableText portableText={home?.content} />
+				<ImageAndText content={home?.content} />
+			</Container>
+		</Section>
+
+		<Section id="services" class="bg-primary">
+			<Container>
+				<div class="mx-auto max-w-3xl text-center">
+					<h2>Comprehensive Electrical Solutions</h2>
+					<p>
+						Lenergy Services offers a wide range of electrical services designed to meet your needs
+					</p>
+				</div>
+				<div class="prose-ol:grid prose-ol:md:grid-cols-2 prose-ol:gap-9">
+					<PortableText portableText={home?.services} />
+				</div>
 			</Container>
 		</Section>
 	</main>

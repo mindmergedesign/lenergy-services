@@ -1,6 +1,6 @@
 ---
-import Container from '@/components/layout/Container.astro'
 import NavBar from '@/components/elements/NavBar.astro'
+import Container from '@/components/layout/Container.astro'
 
 const { class: className, ...rest } = Astro.props
 const pathname = Astro.url.pathname
@@ -8,7 +8,7 @@ const pathname = Astro.url.pathname
 
 <header>
 	<div
-		class={`bg-white mx-auto flex justify-between border-b shadow-md transition-all duration-300 ease-in-out ${className}`}
+		class={`mx-auto flex justify-between transition-all duration-300 ease-in-out absolute z-50 w-full isolate ${className}`}
 	>
 		<Container>
 			<NavBar pathname={pathname} />
