@@ -21,9 +21,19 @@ export default {
       },
     },
     {
+      name: 'hero',
+      title: 'Hero',
+      type: 'hero',
+    },
+    {
       name: 'content',
       title: 'Content',
-      type: 'portableText',
+      type: 'imageAndText',
+    },
+    {
+      name: 'services',
+      title: 'Services',
+      type: 'portableText'
     },
     {
       name: 'seo',

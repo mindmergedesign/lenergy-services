@@ -1,21 +1,25 @@
 ---
-import Logo from '@/components/elements/Logo.astro'
-import navItems from '@/components/elements/navItems'
+// Packages
 import { AlignJustify, X } from 'lucide-astro'
 
+// Components
+import Logo from '@/components/elements/Logo.astro'
+import navItems from '@/components/elements/navItems'
+
+// Misc
 const { pathname, ...rest } = Astro.props
 ---
 
 <nav class="w-full">
-	<div x-data="{ open: false }">
+	<div class="mobile-menu-container">
 		<div class="flex justify-between">
 			<div class="flex w-full justify-between">
-				<div class="block w-48 self-center py-3 text-primary md:w-64">
+				<div class="block w-48 self-center py-3 md:w-64">
 					<a href="/" class="w-full">
-						<Logo class="header-logo text-primary" />
+						<Logo class="text-foreground" />
 					</a>
 				</div>
-				<div class="hidden w-full justify-end text-primary sm:ml-6 sm:flex sm:space-x-3">
+				<div class="hidden w-full justify-end sm:ml-6 sm:flex sm:space-x-3">
 					{
 						navItems
 							.map(({ itemName, itemUrl }) => (
@@ -23,8 +27,8 @@ const { pathname, ...rest } = Astro.props
 									href={itemUrl}
 									class={
 										pathname === itemUrl || (itemUrl !== '/' && pathname.startsWith(itemUrl))
-											? 'active inline-flex items-center bg-black/20 px-3 pt-1 text-sm font-medium text-white'
-											: 'hover:white inline-flex items-center px-3 pt-1 text-sm font-medium text-white hover:bg-black/20'
+											? 'active text-foreground hover:text-foreground relative inline-flex cursor-pointer items-center px-3 pt-1 font-medium transition-all ease-in-out before:absolute before:bottom-0 before:left-[50%] before:h-[2px] before:w-0 before:origin-center before:bg-gray-400 before:transition-[width] before:duration-700 before:ease-in-out after:absolute after:right-[50%] after:bottom-0 after:h-[2px] after:w-0 after:origin-center after:bg-gray-400 after:transition-[width] after:duration-700 after:ease-in-out hover:before:w-[50%] hover:after:w-[50%]'
+											: 'text-foreground hover:text-foreground relative inline-flex cursor-pointer items-center px-3 pt-1 font-medium transition-all ease-in-out before:absolute before:bottom-0 before:left-[50%] before:h-[2px] before:w-0 before:origin-center before:bg-gray-400 before:transition-[width] before:duration-700 before:ease-in-out after:absolute after:right-[50%] after:bottom-0 after:h-[2px] after:w-0 after:origin-center after:bg-gray-400 after:transition-[width] after:duration-700 after:ease-in-out hover:before:w-[50%] hover:after:w-[50%]'
 									}
 								>
 									{itemName}
@@ -38,29 +42,28 @@ const { pathname, ...rest } = Astro.props
 			<div class="-mr-2 flex items-center sm:hidden">
 				{/* Mobile menu button */}
 				<div
-					class="md: inline-flex items-center justify-center rounded-md p-2 text-black hover:bg-gray-100 hover:text-gray-500 focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+					class="md: text-foreground hover:bg-muted inline-flex items-center justify-center rounded-md p-2 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-inset"
 				>
 					<span class="sr-only">Open main menu</span>
 
-					<button @click="open = ! open" id='mobile-menu'
-						aria-label='mobile-menu'>
-						<X class="text-primary" x-cloak x-show="open == true" />
-						<AlignJustify class="text-primary" x-cloak x-show="open == false" />
+					<button id="mobile-menu-button" aria-label="mobile-menu" class="cursor-pointer">
+						<X class="text-foreground hidden" id="close-icon" />
+						<AlignJustify class="text-foreground" id="menu-icon" />
 					</button>
 				</div>
 			</div>
 		</div>
 
-		<div class="animate-slide-down sm:hidden" x-show="open" @click.outside="open = false">
-			<div class="space-y-1 pb-3 pt-2">
+		<div class="animate-slide-down hidden sm:hidden" id="mobile-menu-panel">
+			<div class="space-y-1 bg-white pt-2 pb-3">
 				{
 					navItems.map(({ itemName, itemUrl }) => (
 						<a
 							href={itemUrl}
 							class={
 								pathname === itemUrl || (itemUrl !== '/' && pathname.startsWith(itemUrl))
-									? 'active block border-l-4 border-primary bg-white py-2 pl-3 pr-4 text-base font-medium'
-									: 'block border-l-4 border-muted bg-white py-2 pl-3 pr-4 text-base font-medium'
+									? 'active border-primary text-foreground block border-l-4 py-2 pr-4 pl-3 text-base font-medium'
+									: 'text-foreground block border-l-4 border-stone-600 py-2 pr-4 pl-3 text-base font-medium'
 							}
 						>
 							{itemName}
@@ -71,3 +74,41 @@ const { pathname, ...rest } = Astro.props
 		</div>
 	</div>
 </nav>
+
+<script>
+	document.addEventListener('astro:page-load', () => {
+		const mobileMenuButton = document.getElementById('mobile-menu-button')
+		const mobileMenuPanel = document.getElementById('mobile-menu-panel')
+		const menuIcon = document.getElementById('menu-icon')
+		const closeIcon = document.getElementById('close-icon')
+		let isMenuOpen = false
+
+		// Function to toggle the mobile menu
+		function toggleMobileMenu() {
+			isMenuOpen = !isMenuOpen
+
+			if (isMenuOpen) {
+				mobileMenuPanel.classList.remove('hidden')
+				menuIcon.classList.add('hidden')
+				closeIcon.classList.remove('hidden')
+			} else {
+				mobileMenuPanel.classList.add('hidden')
+				menuIcon.classList.remove('hidden')
+				closeIcon.classList.add('hidden')
+			}
+		}
+
+		// Add click event listener to the mobile menu button
+		mobileMenuButton.addEventListener('click', toggleMobileMenu)
+
+		// Close the menu when clicking outside
+		document.addEventListener('click', (event) => {
+			const container = document.querySelector('.mobile-menu-container')
+
+			// Check if the click was outside the mobile menu container
+			if (isMenuOpen && container && !container.contains(event.target)) {
+				toggleMobileMenu()
+			}
+		})
+	})
+</script>

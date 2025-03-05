@@ -19,14 +19,12 @@ const { settings } = Astro.props
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<ClientRouter />
 
-		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
 		<slot name="head" />
 	</head>
 
 	<body>
 		<a
-			class="absolute left-0 z-50 m-3 -translate-y-56 bg-secondary p-3 text-secondary-foreground no-underline transition focus:translate-y-0"
+			class="bg-secondary text-secondary-foreground absolute left-0 z-50 m-3 -translate-y-56 p-3 no-underline transition focus:translate-y-0"
 			href="#main-content">Skip Navigation</a
 		>
 

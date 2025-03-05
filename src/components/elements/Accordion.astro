@@ -1,36 +1,104 @@
 ---
+// Packages
 import PortableText from '@/components/elements/PortableText.astro'
 import { ChevronDown } from 'lucide-astro'
 
+// Misc
 const { accordionItems, class: className, ...rest } = Astro.props
 ---
 
 <div
-	x-data="{ 
-        activeAccordion: '', 
-        setActiveAccordion(id) { 
-            this.activeAccordion = (this.activeAccordion == id) ? '' : id 
-        } 
-    }"
-	class={`relative mx-auto w-full divide-y divide-gray-200 overflow-hidden  ${className}`}
+	class={`relative mx-auto w-full divide-y divide-gray-400/25 overflow-hidden ${className}`}
+	id="accordion-container"
 >
-
-{accordionItems?.map(({...item})=>(
-
-	<div x-data="{ id: $id('accordion') }" class="group cursor-pointer prose max-w-none">
-		<button
-			@click="setActiveAccordion(id)"
-			class="w-full"
-		>
-			<div class="flex w-full select-none items-center p-3 text-left ">
-			    <p class="my-0 font-bold w-[90%]">{item?.title}</p>
-    			
-    			<div class="w-[10%] flex justify-end"><ChevronDown class="text-primary duration-200 ease-out"  :class="{ 'rotate-180': activeAccordion==id }"/></div>
+	{
+		accordionItems?.map(({ ...item }, index) => (
+			<div class="group accordion-item cursor-pointer" data-index={index}>
+				<button class="accordion-trigger w-full cursor-pointer">
+					<div class="flex w-full items-center p-3 text-left select-none md:p-6">
+						<p class="my-0! w-[90%] font-bold">{item?.title}</p>
+						<div class="flex w-[10%] justify-end">
+							<ChevronDown class="text-primary chevron-icon duration-200 ease-out" />
+						</div>
+					</div>
+				</button>
+				<div
+					class="accordion-content overflow-hidden border-t border-gray-400/25 p-3 md:p-6"
+					style="display: none; max-height: 0; opacity: 0; transition: max-height 0.2s ease-out, opacity 0.2s ease-out;"
+				>
+					<PortableText portableText={item?.description} />
+				</div>
 			</div>
-		</button>
-		<div x-show="activeAccordion==id" x-collapse x-cloak class="px-3 border-t">
-			<PortableText portableText={item?.description} />
-		</div>
-	</div>
-	))}
+		))
+	}
 </div>
+
+<script>
+	// Wait for DOM to be fully loaded
+	document.addEventListener('astro:page-load', () => {
+		// Get all accordion items
+		const accordionItems = document.querySelectorAll('.accordion-item')
+		let activeAccordion = null
+
+		// Add click event listeners to each accordion trigger
+		accordionItems.forEach((item) => {
+			const trigger = item.querySelector('.accordion-trigger')
+			const content = item.querySelector('.accordion-content')
+			const chevron = item.querySelector('.chevron-icon')
+
+			trigger.addEventListener('click', () => {
+				// If this item is already active, close it
+				if (activeAccordion === item) {
+					closeAccordion(content, chevron)
+					activeAccordion = null
+				} else {
+					// If another item is open, close it first
+					if (activeAccordion) {
+						const activeContent = activeAccordion.querySelector('.accordion-content')
+						const activeChevron = activeAccordion.querySelector('.chevron-icon')
+						closeAccordion(activeContent, activeChevron)
+					}
+
+					// Open the clicked item
+					openAccordion(content, chevron)
+					activeAccordion = item
+				}
+			})
+		})
+
+		// Function to open an accordion
+		function openAccordion(content, chevron) {
+			// First display the content so we can animate it
+			content.style.display = 'block'
+
+			// Use setTimeout to ensure the display change has taken effect
+			setTimeout(() => {
+				content.style.maxHeight = '2000px' // A large value that will accommodate most content
+				content.style.opacity = '1'
+				chevron.classList.add('rotate-180')
+			}, 10)
+		}
+
+		// Function to close an accordion
+		function closeAccordion(content, chevron) {
+			content.style.maxHeight = '0'
+			content.style.opacity = '0'
+			chevron.classList.remove('rotate-180')
+
+			// Wait for the transition to complete before hiding the element
+			setTimeout(() => {
+				content.style.display = 'none'
+			}, 200) // This should match the transition duration
+		}
+	})
+</script>
+
+<style>
+	.rotate-180 {
+		transform: rotate(180deg);
+	}
+
+	.chevron-icon {
+		transition: transform 0.2s ease-out;
+	}
+</style>

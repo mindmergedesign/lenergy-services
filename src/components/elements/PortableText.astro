@@ -1,5 +1,6 @@
 ---
 import { PortableText as PortableTextInternal } from 'astro-portabletext'
+import IntroMark from './IntroMark.astro'
 import PortableTextImage from './PortableTextImage.astro'
 
 const { portableText } = Astro.props
@@ -7,6 +8,9 @@ const { portableText } = Astro.props
 const components = {
 	type: {
 		image: PortableTextImage
+	},
+	mark: {
+		intro: IntroMark
 	}
 }
 ---
