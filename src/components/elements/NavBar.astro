@@ -15,8 +15,8 @@ const { pathname, ...rest } = Astro.props
 		<div class="flex justify-between">
 			<div class="flex w-full justify-between">
 				<div class="block w-48 self-center py-3 md:w-64">
-					<a href="/" class="w-full">
-						<Logo class="text-foreground" />
+					<a href="/" class="w-full text-white">
+						<Logo class="logo text-white" />
 					</a>
 				</div>
 				<div class="hidden w-full justify-end sm:ml-6 sm:flex sm:space-x-3">
@@ -27,8 +27,8 @@ const { pathname, ...rest } = Astro.props
 									href={itemUrl}
 									class={
 										pathname === itemUrl || (itemUrl !== '/' && pathname.startsWith(itemUrl))
-											? 'active text-foreground hover:text-foreground relative inline-flex cursor-pointer items-center px-3 pt-1 font-medium transition-all ease-in-out before:absolute before:bottom-0 before:left-[50%] before:h-[2px] before:w-0 before:origin-center before:bg-gray-400 before:transition-[width] before:duration-700 before:ease-in-out after:absolute after:right-[50%] after:bottom-0 after:h-[2px] after:w-0 after:origin-center after:bg-gray-400 after:transition-[width] after:duration-700 after:ease-in-out hover:before:w-[50%] hover:after:w-[50%]'
-											: 'text-foreground hover:text-foreground relative inline-flex cursor-pointer items-center px-3 pt-1 font-medium transition-all ease-in-out before:absolute before:bottom-0 before:left-[50%] before:h-[2px] before:w-0 before:origin-center before:bg-gray-400 before:transition-[width] before:duration-700 before:ease-in-out after:absolute after:right-[50%] after:bottom-0 after:h-[2px] after:w-0 after:origin-center after:bg-gray-400 after:transition-[width] after:duration-700 after:ease-in-out hover:before:w-[50%] hover:after:w-[50%]'
+											? 'active relative inline-flex cursor-pointer items-center px-3 pt-1 font-medium text-white transition-all ease-in-out before:absolute before:bottom-0 before:left-[50%] before:h-[2px] before:w-0 before:origin-center before:bg-gray-400 before:transition-[width] before:duration-700 before:ease-in-out after:absolute after:right-[50%] after:bottom-0 after:h-[2px] after:w-0 after:origin-center after:bg-gray-400 after:transition-[width] after:duration-700 after:ease-in-out hover:text-white hover:before:w-[50%] hover:after:w-[50%]'
+											: 'relative inline-flex cursor-pointer items-center px-3 pt-1 font-medium text-white transition-all ease-in-out before:absolute before:bottom-0 before:left-[50%] before:h-[2px] before:w-0 before:origin-center before:bg-gray-400 before:transition-[width] before:duration-700 before:ease-in-out after:absolute after:right-[50%] after:bottom-0 after:h-[2px] after:w-0 after:origin-center after:bg-gray-400 after:transition-[width] after:duration-700 after:ease-in-out hover:text-white hover:before:w-[50%] hover:after:w-[50%]'
 									}
 								>
 									{itemName}
@@ -42,13 +42,13 @@ const { pathname, ...rest } = Astro.props
 			<div class="-mr-2 flex items-center sm:hidden">
 				{/* Mobile menu button */}
 				<div
-					class="md: text-foreground hover:bg-muted inline-flex items-center justify-center rounded-md p-2 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-inset"
+					class="md: hover:bg-muted inline-flex items-center justify-center rounded-md p-2 text-white hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-inset"
 				>
 					<span class="sr-only">Open main menu</span>
 
 					<button id="mobile-menu-button" aria-label="mobile-menu" class="cursor-pointer">
-						<X class="text-foreground hidden" id="close-icon" />
-						<AlignJustify class="text-foreground" id="menu-icon" />
+						<X class="hidden text-white" id="close-icon" />
+						<AlignJustify class="text-white" id="menu-icon" />
 					</button>
 				</div>
 			</div>
@@ -62,8 +62,8 @@ const { pathname, ...rest } = Astro.props
 							href={itemUrl}
 							class={
 								pathname === itemUrl || (itemUrl !== '/' && pathname.startsWith(itemUrl))
-									? 'active border-primary text-foreground block border-l-4 py-2 pr-4 pl-3 text-base font-medium'
-									: 'text-foreground block border-l-4 border-stone-600 py-2 pr-4 pl-3 text-base font-medium'
+									? 'active border-primary block border-l-4 py-2 pr-4 pl-3 text-base font-medium text-white'
+									: 'block border-l-4 border-stone-600 py-2 pr-4 pl-3 text-base font-medium text-white'
 							}
 						>
 							{itemName}
