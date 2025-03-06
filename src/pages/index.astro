@@ -27,15 +27,18 @@ import { home, settings } from '@/sanity/lib/utils'
 			</Container>
 		</Section>
 
-		<Section id="services" class="bg-primary">
+		<Section
+			id="services"
+			class="bg-primary text-primary-foreground prose-headings:text-primary-foreground prose-strong:text-primary-foreground"
+		>
 			<Container>
 				<div class="mx-auto max-w-3xl text-center">
 					<h2>Comprehensive Electrical Solutions</h2>
-					<p>
+					<p class="intro max-w-none text-center">
 						Lenergy Services offers a wide range of electrical services designed to meet your needs
 					</p>
 				</div>
-				<div class="prose-ol:grid prose-ol:md:grid-cols-2 prose-ol:gap-9">
+				<div class="prose-ul:grid prose-ul:md:grid-cols-2 prose-ul:gap-9 prose-ul:list-none">
 					<PortableText portableText={home?.services} />
 				</div>
 			</Container>

@@ -7,9 +7,10 @@ const { settings } = Astro.props
 ---
 
 <footer
-	class="prose bg-primary text-primary-foreground/50 prose-a:text-primary-foreground/50 max-w-none py-6 text-center text-sm"
+	id="contact"
+	class="prose text-secondary-foreground prose-a:text-secondary-foreground prose-headings:text-secondary-foreground bg-secondary max-w-none py-6 text-center text-sm"
 >
-	<Container>
+	<Container class="mt-9 md:mt-12">
 		<h2>Ready to power up your property? <br />Get a free estimate today!</h2>
 		<div class="py-3">
 			{
@@ -17,7 +18,7 @@ const { settings } = Astro.props
 					<h3>
 						Call:{' '}
 						<a
-							class="prose-a:text-primary-foreground/50 no-underline"
+							class="prose-a:text-secondary-foreground/50 no-underline"
 							href={`tel:${settings?.phone}`}
 						>
 							{settings?.phone}
@@ -29,7 +30,7 @@ const { settings } = Astro.props
 				settings?.siteEmail && (
 					<h3>
 						<a
-							class="prose-a:text-primary-foreground/50 no-underline"
+							class="prose-a:text-secondary-foreground/50 no-underline"
 							href={`mailto:${settings?.siteEmail}`}
 						>
 							{settings?.siteEmail}

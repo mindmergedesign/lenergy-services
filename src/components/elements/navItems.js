@@ -5,12 +5,12 @@ const navItems = [
 			itemHref: '/'
 		},
 		{
-			itemName: 'About Us',
-			itemUrl: '/about-us'
+			itemName: 'Services',
+			itemUrl: '/#services'
 		},
 		{
 			itemName: 'Contact',
-			itemUrl: '/contact'
+			itemUrl: '/#contact'
 		}
 ]
 	
